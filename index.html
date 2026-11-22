@@ -1,0 +1,205 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MY LIFE: prototipo integral para organizar todas las áreas de la vida.">
+<title>MY LIFE | Plataforma integral</title>
+<style>
+:root{--navy:#142238;--blue:#315efb;--pale:#edf2ff;--ink:#1c2938;--muted:#6b7889;--line:#e5eaf1;--bg:#f4f6fa;--white:#fff;--green:#16866a;--red:#c24141}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-columns:258px 1fr}.side{background:var(--navy);color:#fff;padding:22px 14px;display:flex;flex-direction:column;gap:18px;height:100vh;position:sticky;top:0;overflow:auto}.brand{font-size:23px;font-weight:850;letter-spacing:2px;padding:0 12px}.brand small{display:block;color:#9eacc0;font-size:9px;letter-spacing:2px}.navtitle{font-size:10px;color:#8394aa;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;margin:7px 0}.nav{display:grid;gap:3px}.nav button{border:0;background:transparent;color:#cbd4e1;text-align:left;padding:9px 11px;border-radius:8px;display:flex;gap:10px;align-items:center;font-size:12px}.nav button:hover,.nav button.active{background:#263a58;color:white}.nav .code{width:28px;color:#a9bcff;font-size:9px;font-weight:800;letter-spacing:.4px}.sidefoot{margin-top:auto;padding:10px 12px;color:#91a0b4;font-size:10px}.main{min-width:0}.top{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:4}.top strong{font-size:13px}.topright{display:flex;align-items:center;gap:12px}.search{width:min(260px,35vw);border:1px solid var(--line);border-radius:8px;background:#f9fafc;padding:9px 11px;outline:none}.avatar{width:33px;height:33px;border-radius:50%;background:var(--pale);color:var(--blue);display:grid;place-items:center;font-weight:800}.content{max-width:1300px;margin:auto;padding:28px 30px 60px}.hidden{display:none!important}.eyebrow{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:var(--blue);font-weight:800}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:22px}.heading h1{font-size:28px;letter-spacing:-.8px;margin:4px 0}.muted{color:var(--muted)}.sub{font-size:12px;color:var(--muted)}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 13px;border-radius:8px;font-size:12px;font-weight:700}.btn.primary{background:var(--blue);border-color:var(--blue);color:white}.btn.danger{color:var(--red)}.btn:hover{filter:brightness(.98)}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:17px}.stat,.card,.modulecard{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 22px rgba(20,34,56,.045)}.stat{padding:15px}.stat label{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:24px;margin:3px 0}.stat small{font-size:10px;color:var(--muted)}.cols{display:grid;grid-template-columns:1.15fr .85fr;gap:15px}.card{padding:18px;margin-bottom:15px}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.cardhead h2{font-size:14px;margin:0}.rowitem{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #eff2f6}.rowitem:first-of-type{border-top:0}.rowitem .grow{flex:1;min-width:0}.rowitem b{font-size:12px}.rowitem small{display:block;color:var(--muted);font-size:10px}.empty{padding:22px;text-align:center;color:#8793a3;font-size:12px}.modulegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.modulecard{padding:16px;text-align:left;cursor:pointer;transition:.15s}.modulecard:hover{border-color:#b5c5ff;transform:translateY(-1px)}.modulecode{display:inline-flex;background:var(--pale);color:var(--blue);border-radius:6px;padding:5px 7px;font-size:9px;font-weight:850;letter-spacing:.5px}.modulecard h3{font-size:13px;margin:10px 0 4px}.modulecard p{font-size:10px;color:var(--muted);margin:0}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:grid;gap:5px;margin-bottom:11px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted);font-weight:750}.field input,.field select,.field textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;outline:none;background:#fff}.field input:focus,.field select:focus,.field textarea:focus{border-color:#9db1ff}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th{text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#8a96a5;padding:9px;border-bottom:1px solid var(--line)}.table td{padding:11px 9px;border-bottom:1px solid #eff2f6;font-size:11px}.tag{background:#eef2ff;color:#315efb;border-radius:20px;padding:4px 8px;font-size:9px}.notice{padding:12px 14px;border-radius:9px;background:#eff4ff;border:1px solid #dce6ff;color:#41557b;font-size:11px;margin:15px 0}.progress{height:7px;background:#edf0f5;border-radius:9px;overflow:hidden;margin:7px 0}.progress span{display:block;height:100%;background:var(--blue)}.mobiletoggle{display:none}.toast{position:fixed;right:20px;bottom:20px;background:var(--navy);color:#fff;padding:12px 16px;border-radius:9px;opacity:0;transition:.2s;z-index:9}.toast.show{opacity:1}.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:950px){.app{grid-template-columns:220px 1fr}.grid4{grid-template-columns:repeat(2,1fr)}.modulegrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.app{display:block}.side{display:none}.mobiletoggle{display:inline-block}.top{height:58px;padding:0 13px}.content{padding:20px 13px 45px}.heading{align-items:flex-start;flex-direction:column}.cols{grid-template-columns:1fr}.modulegrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.search{width:145px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+ <div class="brand">MY LIFE<small>TU VIDA EN UN SOLO LUGAR</small></div>
+ <div><div class="navtitle">Panel principal</div><nav class="nav" id="mainNav">
+  <button class="active" data-page="home"><span class="code">INICIO</span>Resumen general</button>
+  <button data-page="calendar"><span class="code">AGENDA</span>Calendario</button>
+  <button data-page="tasks"><span class="code">TAREAS</span>Tareas y rutinas</button>
+  <button data-page="finance"><span class="code">DINERO</span>Finanzas</button>
+  <button data-page="all"><span class="code">TODO</span>Todos los módulos</button>
+ </nav></div>
+ <div><div class="navtitle">Herramientas personales</div><nav class="nav">
+  <button data-page="notes"><span class="code">NOTAS</span>Notas y diario</button>
+  <button data-page="goals"><span class="code">METAS</span>Objetivos y proyectos</button>
+  <button data-page="documents"><span class="code">ARCH.</span>Documentos</button>
+ </nav></div>
+ <div class="sidefoot">Prototipo integral · Guardado local en este navegador</div>
+</aside>
+<main class="main">
+<header class="top"><div class="topright"><button class="btn mobiletoggle" onclick="navigate('all')">Módulos</button><strong id="pageTitle">Resumen general</strong></div><div class="topright"><input class="search" id="search" placeholder="Buscar en tus registros"><div class="avatar">ML</div></div></header>
+<div class="content">
+<section id="view-home">
+ <div class="heading"><div><div class="eyebrow">Tu espacio personal</div><h1>Todo tu mundo, organizado.</h1><div class="muted">Una vista general de tus actividades, compromisos y planes.</div></div><span class="sub" id="dateToday"></span></div>
+ <div class="grid4">
+  <div class="stat"><label>Tareas pendientes</label><strong id="sTasks">0</strong><small>Por completar</small></div>
+  <div class="stat"><label>Eventos registrados</label><strong id="sEvents">0</strong><small>En tu agenda</small></div>
+  <div class="stat"><label>Gastos registrados</label><strong id="sExpenses">$ 0</strong><small>Total acumulado</small></div>
+  <div class="stat"><label>Objetivos activos</label><strong id="sGoals">0</strong><small>En seguimiento</small></div>
+ </div>
+ <div class="cols">
+  <div>
+   <div class="card"><div class="cardhead"><h2>Próximos eventos</h2><button class="btn" onclick="navigate('calendar')">Abrir agenda</button></div><div id="homeEvents"></div></div>
+   <div class="card"><div class="cardhead"><h2>Tareas pendientes</h2><button class="btn" onclick="navigate('tasks')">Ver tareas</button></div><div id="homeTasks"></div></div>
+  </div>
+  <div>
+   <div class="card"><div class="cardhead"><h2>Accesos rápidos</h2></div><div class="modulegrid" style="grid-template-columns:1fr 1fr">
+    <button class="modulecard" onclick="navigate('calendar')"><span class="modulecode">AGENDA</span><h3>Calendario</h3><p>Fechas y compromisos</p></button>
+    <button class="modulecard" onclick="navigate('finance')"><span class="modulecode">DINERO</span><h3>Finanzas</h3><p>Ingresos y gastos</p></button>
+    <button class="modulecard" onclick="navigate('all')"><span class="modulecode">VIDA</span><h3>Todos los módulos</h3><p>Accedé a cada área</p></button>
+    <button class="modulecard" onclick="navigate('goals')"><span class="modulecode">METAS</span><h3>Objetivos</h3><p>Tu progreso personal</p></button>
+   </div></div>
+   <div class="card"><div class="cardhead"><h2>Balance financiero</h2><button class="btn" onclick="navigate('finance')">Detalles</button></div><strong style="font-size:25px" id="homeBalance">$ 0</strong><div class="sub">Ingresos menos gastos registrados</div></div>
+   <div class="notice">Esta versión guarda la información en este navegador. No tiene cuentas en la nube ni sincronización entre dispositivos.</div>
+  </div>
+ </div>
+</section>
+
+<section id="view-all" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Ecosistema MY LIFE</div><h1>Todos los módulos</h1><div class="muted">Entrá en cada área para registrar y organizar tu información.</div></div></div>
+ <div class="modulegrid" id="allModules"></div>
+</section>
+
+<section id="view-calendar" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Planificación del tiempo</div><h1>Calendario</h1><div class="muted">Eventos, citas, fechas especiales y vencimientos.</div></div></div>
+ <div class="cols"><div class="card"><div class="cardhead"><h2>Agregar evento</h2></div><form id="eventForm" class="formgrid">
+  <div class="field full"><label>Nombre del evento</label><input id="evTitle" required placeholder="Ej. Reunión, cumpleaños, turno"></div>
+  <div class="field"><label>Fecha</label><input type="date" id="evDate" required></div><div class="field"><label>Hora</label><input type="time" id="evTime"></div>
+  <div class="field full"><label>Categoría</label><select id="evCat"><option>Personal</option><option>Familia</option><option>Trabajo</option><option>Salud</option><option>Estudios</option><option>Trámite</option><option>Otro</option></select></div>
+  <div class="field full"><button class="btn primary">Guardar evento</button></div>
+ </form></div><div class="card"><div class="cardhead"><h2>Agenda guardada</h2></div><div id="eventList"></div></div></div>
+</section>
+
+<section id="view-tasks" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Organización cotidiana</div><h1>Tareas y rutinas</h1><div class="muted">Creá pendientes, asigná prioridades y marcá lo que completaste.</div></div></div>
+ <div class="cols"><div class="card"><div class="cardhead"><h2>Nueva tarea</h2></div><form id="taskForm" class="formgrid">
+  <div class="field full"><label>Descripción</label><input id="taskTitle" required placeholder="¿Qué necesitás hacer?"></div>
+  <div class="field"><label>Fecha límite</label><input type="date" id="taskDate"></div><div class="field"><label>Prioridad</label><select id="taskPriority"><option>Normal</option><option>Alta</option><option>Baja</option></select></div>
+  <div class="field full"><button class="btn primary">Agregar tarea</button></div>
+ </form></div><div class="card"><div class="cardhead"><h2>Lista de tareas</h2></div><div id="taskList"></div></div></div>
+</section>
+
+<section id="view-finance" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Administración del dinero</div><h1>Finanzas personales</h1><div class="muted">Ingresos, gastos, gastos compartidos, deudas y ahorros.</div></div></div>
+ <div class="grid4"><div class="stat"><label>Ingresos</label><strong id="fIncome">$ 0</strong></div><div class="stat"><label>Gastos</label><strong id="fExpense">$ 0</strong></div><div class="stat"><label>Balance</label><strong id="fBalance">$ 0</strong></div><div class="stat"><label>Movimientos</label><strong id="fCount">0</strong></div></div>
+ <div class="cols"><div class="card"><div class="cardhead"><h2>Nuevo movimiento</h2></div><form id="moneyForm" class="formgrid">
+  <div class="field full"><label>Descripción</label><input id="moneyTitle" required placeholder="Ej. Sueldo, alquiler, supermercado"></div>
+  <div class="field"><label>Tipo</label><select id="moneyType"><option value="Gasto">Gasto</option><option value="Ingreso">Ingreso</option><option value="Gasto compartido">Gasto compartido</option><option value="Deuda">Deuda</option><option value="Ahorro">Ahorro</option></select></div>
+  <div class="field"><label>Importe</label><input id="moneyAmount" type="number" min=".01" step=".01" required></div>
+  <div class="field"><label>Fecha</label><input id="moneyDate" type="date" required></div><div class="field"><label>Categoría</label><select id="moneyCat"><option>Hogar</option><option>Servicios</option><option>Alimentación</option><option>Transporte</option><option>Salud</option><option>Trabajo</option><option>Ocio</option><option>Otros</option></select></div>
+  <div class="field full"><button class="btn primary">Guardar movimiento</button></div>
+ </form></div><div class="card"><div class="cardhead"><h2>Movimientos</h2></div><div class="tablewrap"><table class="table"><thead><tr><th>Detalle</th><th>Tipo</th><th>Importe</th><th></th></tr></thead><tbody id="moneyList"></tbody></table></div></div></div>
+ <div class="notice">Registro manual de referencia. No se conecta a cuentas bancarias, tarjetas ni servicios de pago.</div>
+</section>
+
+<section id="view-module" class="hidden">
+ <div class="heading"><div><div class="eyebrow" id="moduleEyebrow">Área personal</div><h1 id="moduleTitle">Módulo</h1><div class="muted" id="moduleDesc"></div></div><button class="btn" onclick="navigate('all')">Volver a módulos</button></div>
+ <div class="cols"><div class="card"><div class="cardhead"><h2 id="moduleFormTitle">Agregar información</h2></div><form id="genericForm" class="formgrid">
+  <div class="field full"><label id="genericNameLabel">Nombre o título</label><input id="genericName" required placeholder="Escribí un título"></div>
+  <div class="field"><label>Fecha (opcional)</label><input type="date" id="genericDate"></div>
+  <div class="field"><label>Categoría</label><input id="genericCategory" placeholder="Ej. Personal, importante"></div>
+  <div class="field full"><label>Detalles y observaciones</label><textarea id="genericDetails" rows="4" placeholder="Agregá información útil, notas o detalles..."></textarea></div>
+  <div class="field full"><button class="btn primary">Guardar registro</button></div>
+ </form></div><div class="card"><div class="cardhead"><h2>Mis registros</h2><span class="tag" id="moduleCount">0 elementos</span></div><div id="genericList"></div></div></div>
+</section>
+
+<section id="view-notes" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Espacio privado</div><h1>Notas y diario personal</h1><div class="muted">Ideas, pensamientos, recuerdos y reflexiones.</div></div></div>
+ <div class="cols"><div class="card"><h2>Nueva nota</h2><form id="noteForm"><div class="field"><label>Título</label><input id="noteTitle" required></div><div class="field"><label>Contenido</label><textarea id="noteBody" rows="6"></textarea></div><button class="btn primary">Guardar nota</button></form></div><div class="card"><h2>Mis notas</h2><div id="noteList"></div></div></div>
+</section>
+
+<section id="view-goals" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Tu futuro</div><h1>Objetivos y proyectos</h1><div class="muted">Definí metas, proyectos personales y seguí los avances.</div></div></div>
+ <div class="cols"><div class="card"><h2>Crear objetivo</h2><form id="goalForm"><div class="field"><label>Nombre del objetivo</label><input id="goalTitle" required placeholder="Ej. Ahorrar para viajar"></div><div class="field"><label>Progreso inicial (%)</label><input id="goalProgress" type="number" min="0" max="100" value="0"></div><button class="btn primary">Crear objetivo</button></form></div><div class="card"><h2>Mis objetivos</h2><div id="goalList"></div></div></div>
+</section>
+
+<section id="view-documents" class="hidden">
+ <div class="heading"><div><div class="eyebrow">Archivos y vencimientos</div><h1>Documentos</h1><div class="muted">Llevá un inventario de documentos y sus fechas importantes.</div></div></div>
+ <div class="cols"><div class="card"><h2>Registrar documento</h2><form id="docForm"><div class="field"><label>Nombre del documento</label><input id="docTitle" required placeholder="Ej. Pasaporte, contrato, seguro"></div><div class="field"><label>Tipo</label><select id="docType"><option>Identificación</option><option>Contrato</option><option>Seguro</option><option>Vehículo</option><option>Propiedad</option><option>Estudios</option><option>Trabajo</option><option>Otro</option></select></div><div class="field"><label>Fecha de vencimiento</label><input id="docDate" type="date"></div><button class="btn primary">Guardar documento</button></form></div><div class="card"><h2>Mis documentos</h2><div id="docList"></div></div></div>
+ <div class="notice">Esta sección guarda referencias y datos descriptivos, no almacena copias cifradas de documentos oficiales. Evitá ingresar números sensibles en este prototipo.</div>
+</section>
+</div>
+</main></div><div class="toast" id="toast"></div>
+<script>
+const MODULES=[
+['Familia y relaciones','Contactos, cumpleaños, aniversarios, celebraciones y regalos.','FAMILIA'],
+['Hogar y propiedades','Alquiler, servicios, mantenimiento, reparaciones, limpieza e inventario.','HOGAR'],
+['Salud y bienestar','Turnos, controles, actividad, alimentación, sueño y hábitos.','SALUD'],
+['Trabajo y carrera','Empleo, horarios, reuniones, proyectos, clientes y vacaciones.','TRABAJO'],
+['Estudios y aprendizaje','Materias, cursos, exámenes, tareas, libros e idiomas.','ESTUDIOS'],
+['Vehículos y movilidad','Autos, motos, seguros, combustible, mantenimiento y multas.','VEHICULOS'],
+['Viajes y experiencias','Destinos, reservas, pasajes, hoteles, itinerarios y recuerdos.','VIAJES'],
+['Compras y pertenencias','Compras, listas de deseos, garantías, ropa y tecnología.','COMPRAS'],
+['Vida digital','Suscripciones, dispositivos, licencias, dominios y copias de seguridad.','DIGITAL'],
+['Ocio y entretenimiento','Películas, series, música, videojuegos, libros y hobbies.','OCIO'],
+['Mascotas','Datos, vacunas, veterinario, alimentación y cuidados.','MASCOTAS'],
+['Cocina y alimentación','Recetas, menús, lista de supermercado y planificación de comidas.','COCINA'],
+['Eventos y celebraciones','Fiestas, reuniones, fechas especiales y organización de eventos.','EVENTOS'],
+['Emergencias','Contactos de emergencia, planes y datos importantes.','EMERGENCIA'],
+['Colecciones','Objetos, colecciones, inventarios y catálogos personales.','COLECCION'],
+['Seguros y patrimonio','Pólizas, bienes, garantías, inversiones y patrimonio.','PATRIMONIO'],
+['Trámites y gestiones','Trámites pendientes, turnos, solicitudes y vencimientos.','TRAMITES'],
+['Rutinas y hábitos','Rutinas diarias, hábitos, seguimiento y retos personales.','HABITOS'],
+['Diario y recuerdos','Reflexiones, recuerdos, fotos por organizar y momentos importantes.','RECUERDOS'],
+['Metas y sueños','Objetivos a corto, mediano y largo plazo.','OBJETIVOS'],
+['Proyectos personales','Ideas, emprendimientos, planes y tareas de proyectos.','PROYECTOS'],
+['Finanzas compartidas','Gastos comunes, cuentas por dividir, préstamos y dinero adeudado.','COMPARTIDOS'],
+['Mudanzas y vivienda','Búsqueda de vivienda, presupuestos, listas y organización de mudanzas.','MUDANZA'],
+['Documentos y vencimientos','Identificaciones, contratos, garantías y fechas de renovación.','DOCUMENTOS']
+];
+const $=id=>document.getElementById(id),today=new Date().toISOString().slice(0,10);
+const load=k=>{try{return JSON.parse(localStorage.getItem('mylife_all_'+k))||[]}catch(e){return []}},save=(k,v)=>localStorage.setItem('mylife_all_'+k,JSON.stringify(v));
+let events=load('events'),tasks=load('tasks'),money=load('money'),notes=load('notes'),goals=load('goals'),docs=load('docs'),activeModule='';
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fmtDate(s){if(!s)return 'Sin fecha';let a=s.split('-');return a.length===3?`${a[2]}/${a[1]}/${a[0]}`:s}
+function cash(n){return new Intl.NumberFormat('es-UY',{style:'currency',currency:'UYU',maximumFractionDigits:0}).format(n||0)}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2000)}
+const views=['home','all','calendar','tasks','finance','module','notes','goals','documents'];
+function navigate(page){views.forEach(v=>$('view-'+v).classList.toggle('hidden',v!==page));document.querySelectorAll('#mainNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('pageTitle').textContent=({home:'Resumen general',all:'Todos los módulos',calendar:'Calendario',tasks:'Tareas y rutinas',finance:'Finanzas',module:activeModule,notes:'Notas y diario',goals:'Objetivos y proyectos',documents:'Documentos'})[page];render();window.scrollTo(0,0)}
+document.querySelectorAll('#mainNav button').forEach(b=>b.onclick=()=>navigate(b.dataset.page));
+function openModule(i){activeModule=MODULES[i][0];$('moduleEyebrow').textContent='Módulo personal';$('moduleTitle').textContent=MODULES[i][0];$('moduleDesc').textContent=MODULES[i][1];$('genericNameLabel').textContent='Nombre o título';$('genericName').placeholder='Agregar a '+MODULES[i][0].toLowerCase();navigate('module');}
+function renderModules(){$('allModules').innerHTML=MODULES.map((m,i)=>`<button class="modulecard" onclick="openModule(${i})"><span class="modulecode">${m[2]}</span><h3>${m[0]}</h3><p>${m[1]}</p></button>`).join('')}
+function renderGeneric(){let arr=load('mod_'+activeModule);$('moduleCount').textContent=arr.length+' registros';$('genericList').innerHTML=arr.length?arr.slice().reverse().map(x=>`<div class="rowitem"><div class="grow"><b>${esc(x.name)}</b><small>${esc(x.date?fmtDate(x.date)+' · ': '')}${esc(x.category||'Sin categoría')}${x.details?' · '+esc(x.details):''}</small></div><button class="btn danger" onclick="deleteGeneric('${x.id}')">Eliminar</button></div>`).join(''):'<div class="empty">Todavía no hay registros en esta sección.</div>'}
+function deleteGeneric(key){let a=load('mod_'+activeModule).filter(x=>x.id!==key);save('mod_'+activeModule,a);renderGeneric();toast('Registro eliminado')}
+function render(){
+ renderModules();renderGeneric();
+ $('sTasks').textContent=tasks.filter(x=>!x.done).length;$('sEvents').textContent=events.length;$('sGoals').textContent=goals.length;
+ let ex=money.filter(x=>x.type==='Gasto'||x.type==='Gasto compartido').reduce((s,x)=>s+x.amount,0),inc=money.filter(x=>x.type==='Ingreso').reduce((s,x)=>s+x.amount,0);
+ $('sExpenses').textContent=cash(ex);$('homeBalance').textContent=cash(inc-ex);
+ $('homeEvents').innerHTML=events.length?events.slice().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,5).map(e=>`<div class="rowitem"><div class="grow"><b>${esc(e.title)}</b><small>${fmtDate(e.date)} ${esc(e.time||'')} · ${esc(e.cat)}</small></div></div>`).join(''):'<div class="empty">Todavía no agregaste eventos.</div>';
+ $('homeTasks').innerHTML=tasks.filter(x=>!x.done).slice(0,5).map(t=>`<div class="rowitem"><div class="grow"><b>${esc(t.title)}</b><small>${t.date?fmtDate(t.date):'Sin fecha límite'} · ${esc(t.priority)}</small></div><button class="btn" onclick="toggleTask('${t.id}')">Completar</button></div>`).join('')||'<div class="empty">No hay tareas pendientes.</div>';
+ $('eventList').innerHTML=events.length?events.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(e=>`<div class="rowitem"><div class="grow"><b>${esc(e.title)}</b><small>${fmtDate(e.date)} ${esc(e.time||'')} · ${esc(e.cat)}</small></div><button class="btn danger" onclick="removeFrom('events','${e.id}')">Eliminar</button></div>`).join(''):'<div class="empty">No hay eventos.</div>';
+ $('taskList').innerHTML=tasks.length?tasks.map(t=>`<div class="rowitem"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${t.id}')"><div class="grow"><b style="${t.done?'text-decoration:line-through;color:#929eac':''}">${esc(t.title)}</b><small>${t.date?fmtDate(t.date):'Sin fecha'} · ${esc(t.priority)}</small></div><button class="btn danger" onclick="removeFrom('tasks','${t.id}')">Quitar</button></div>`).join(''):'<div class="empty">No hay tareas.</div>';
+ $('fIncome').textContent=cash(inc);$('fExpense').textContent=cash(ex);$('fBalance').textContent=cash(inc-ex);$('fCount').textContent=money.length;
+ $('moneyList').innerHTML=money.length?money.slice().reverse().map(m=>`<tr><td><b>${esc(m.title)}</b><br><span class="sub">${fmtDate(m.date)} · ${esc(m.cat)}</span></td><td>${esc(m.type)}</td><td>${cash(m.amount)}</td><td><button class="btn danger" onclick="removeFrom('money','${m.id}')">Quitar</button></td></tr>`).join(''):'<tr><td colspan="4" class="empty">Sin movimientos registrados.</td></tr>';
+ $('noteList').innerHTML=notes.length?notes.slice().reverse().map(n=>`<div class="rowitem"><div class="grow"><b>${esc(n.title)}</b><small>${esc(n.body)}</small></div><button class="btn danger" onclick="removeFrom('notes','${n.id}')">Quitar</button></div>`).join(''):'<div class="empty">No hay notas guardadas.</div>';
+ $('goalList').innerHTML=goals.length?goals.map(g=>`<div class="rowitem" style="display:block"><div style="display:flex;justify-content:space-between"><b>${esc(g.title)}</b><b>${g.progress}%</b></div><div class="progress"><span style="width:${g.progress}%"></span></div><button class="btn" onclick="goalUp('${g.id}')">Sumar 10%</button><button class="btn danger" onclick="removeFrom('goals','${g.id}')">Eliminar</button></div>`).join(''):'<div class="empty">No hay objetivos.</div>';
+ $('docList').innerHTML=docs.length?docs.slice().reverse().map(d=>`<div class="rowitem"><div class="grow"><b>${esc(d.title)}</b><small>${esc(d.type)} · Vence: ${fmtDate(d.date)}</small></div><button class="btn danger" onclick="removeFrom('docs','${d.id}')">Quitar</button></div>`).join(''):'<div class="empty">No hay documentos registrados.</div>';
+}
+function removeFrom(key,keyid){if(!confirm('¿Eliminar este registro?'))return;let data=key==='events'?events:key==='tasks'?tasks:key==='money'?money:key==='notes'?notes:key==='goals'?goals:docs;data=data.filter(x=>x.id!==keyid);if(key==='events')events=data;if(key==='tasks')tasks=data;if(key==='money')money=data;if(key==='notes')notes=data;if(key==='goals')goals=data;if(key==='docs')docs=data;save(key,data);render();toast('Registro eliminado')}
+function toggleTask(key){tasks=tasks.map(t=>t.id===key?{...t,done:!t.done}:t);save('tasks',tasks);render()}
+function goalUp(key){goals=goals.map(g=>g.id===key?{...g,progress:Math.min(100,g.progress+10)}:g);save('goals',goals);render();toast('Progreso actualizado')}
+$('eventForm').onsubmit=e=>{e.preventDefault();events.push({id:id(),title:$('evTitle').value,date:$('evDate').value,time:$('evTime').value,cat:$('evCat').value});save('events',events);e.target.reset();$('evDate').value=today;render();toast('Evento guardado')};
+$('taskForm').onsubmit=e=>{e.preventDefault();tasks.push({id:id(),title:$('taskTitle').value,date:$('taskDate').value,priority:$('taskPriority').value,done:false});save('tasks',tasks);e.target.reset();render();toast('Tarea agregada')};
+$('moneyForm').onsubmit=e=>{e.preventDefault();money.push({id:id(),title:$('moneyTitle').value,type:$('moneyType').value,amount:Number($('moneyAmount').value),date:$('moneyDate').value,cat:$('moneyCat').value});save('money',money);e.target.reset();$('moneyDate').value=today;render();toast('Movimiento guardado')};
+$('genericForm').onsubmit=e=>{e.preventDefault();let a=load('mod_'+activeModule);a.push({id:id(),name:$('genericName').value,date:$('genericDate').value,category:$('genericCategory').value,details:$('genericDetails').value});save('mod_'+activeModule,a);e.target.reset();renderGeneric();toast('Información guardada')};
+$('noteForm').onsubmit=e=>{e.preventDefault();notes.push({id:id(),title:$('noteTitle').value,body:$('noteBody').value});save('notes',notes);e.target.reset();render();toast('Nota guardada')};
+$('goalForm').onsubmit=e=>{e.preventDefault();goals.push({id:id(),title:$('goalTitle').value,progress:Math.min(100,Math.max(0,Number($('goalProgress').value)||0))});save('goals',goals);e.target.reset();render();toast('Objetivo creado')};
+$('docForm').onsubmit=e=>{e.preventDefault();docs.push({id:id(),title:$('docTitle').value,type:$('docType').value,date:$('docDate').value});save('docs',docs);e.target.reset();render();toast('Documento registrado')};
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter'){let q=e.target.value.toLowerCase();let found=[...events.map(x=>x.title),...tasks.map(x=>x.title),...money.map(x=>x.title),...notes.map(x=>x.title),...goals.map(x=>x.title),...docs.map(x=>x.title)];MODULES.forEach(m=>load('mod_'+m[0]).forEach(x=>found.push(x.name)));let matches=found.filter(x=>x.toLowerCase().includes(q));alert(matches.length?'Resultados encontrados:\\n'+matches.join('\\n'):'No se encontraron coincidencias.')}});
+$('dateToday').textContent=new Intl.DateTimeFormat('es-UY',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+$('evDate').value=today;$('moneyDate').value=today;
+render();
+</script>
+</body></html>'''
+
+path = Path("/mnt/data/MY_LIFE_todos_los_modulos.html")
+path.write_text(html, encoding="utf-8")
+print(f"Creado: {path} — {path.stat().st_size:,} bytes")
